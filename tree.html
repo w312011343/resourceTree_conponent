@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>资源树</title>
+	<style type="text/css">
+		.treeCont{
+			padding-left: 20px;
+		}
+		.treeLevlCont{
+			padding-left: 10px;
+		}
+		
+		.itemTitle{
+
+		}
+		.itemIcon{
+			height: 16px;
+			width: 16px;
+			display: inline-block;
+			cursor: pointer;
+			box-sizing: border-box;
+			vertical-align: middle;
+		}
+		.itemLevelTitle{
+			display: inline-block;
+			height: 20px;
+			line-height: 20px;
+			vertical-align: middle;
+		}
+		.hide{
+			display: none;
+		}
+		.itemShow{
+			background: url('./icon/open.png') no-repeat;
+			background-size: 100% 100%;
+		}
+		.itemHide{
+			background: url('./icon/hide.png') no-repeat;
+			background-size: 100% 100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="tree">
+		<div class="treeCont">
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="tree.js"></script>
+<script type="text/javascript">
+	var $treeCont = $('.treeCont');
+	var data = [
+		{
+			title:"系统管理",
+			datas:[
+				{
+					title:"机构管理",
+					datas:[
+						{
+							title:"假数据1",
+							datas:[]
+						},
+						{
+							title:"假数据1",
+							datas:[]
+						}
+					]
+				},
+				{
+					title:"部门管理",
+					datas:[]
+				},
+				{
+					title:"员工管理",
+					datas:[]
+				}
+			]
+		},
+		{
+			title:"商品管理",
+			datas:[
+				{
+					title:"机构管理",
+					datas:[
+						{
+							title:"部分快捷",
+							datas:[]
+						},
+						{
+							title:"员工管理",
+							datas:[]
+						}
+					]
+				},
+				{
+					title:"部门管理1",
+					datas:[]
+				},
+				{
+					title:"员工管理1",
+					datas:[]
+				}
+			]
+		}
+	]
+	var tree = new Tree(data);
+	tree.createTree($treeCont);
+	$(document).off('click.itemIcon').on('click.itemIcon','.treeItem .itemIcon',function(e){
+		var $target = $(e.currentTarget);
+		var $treeLevlCont = $target.closest('.itemTitle').siblings('.treeLevlCont');
+		// 展开收起
+		if ($target.hasClass('itemControl')) {
+			$target.hasClass('itemShow')?$treeLevlCont.removeClass('hide'):$treeLevlCont.addClass('hide')
+			$target.toggleClass('itemShow').toggleClass('itemHide')
+		}else{
+			// 监听选中不选中
+			if ($target.is(':checked')) {
+				// 选中时候调用
+			}else{
+				// 不选中时候
+			}
+		}
+
+	});
+</script>
