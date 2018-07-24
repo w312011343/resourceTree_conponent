@@ -4,15 +4,21 @@
 	<meta charset="utf-8">
 	<title>资源树</title>
 	<style type="text/css">
+		body{
+			background: #f7f7f7;
+		}
 		.treeCont{
 			padding-left: 20px;
 		}
 		.treeLevlCont{
-			padding-left: 10px;
+			padding-left: 20px;
 		}
-		
-		.itemTitle{
-
+		.titleContent{
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.itemLevelSubTitle{
+			display:inline-block;
 		}
 		.itemIcon{
 			height: 16px;
@@ -21,6 +27,7 @@
 			cursor: pointer;
 			box-sizing: border-box;
 			vertical-align: middle;
+			position: relative;
 		}
 		.itemLevelTitle{
 			display: inline-block;
@@ -39,6 +46,38 @@
 			background: url('./icon/hide.png') no-repeat;
 			background-size: 100% 100%;
 		}
+		.treeItem{
+			position: relative;
+		}
+		.treeItem{
+			margin-left: 10px;
+		}
+		.treeItem::after{
+			content: '';
+			position: absolute;
+			top: 32px;
+			left: 6px;
+			width: 1px;
+			height: calc(100% - 28px);
+			border-left: 1px dashed red;
+		}
+		.treeItem .itemControl::before{
+			content: '';
+			position: absolute;
+			top: 7px;
+    		left: -22px;
+			width: 20px;
+			height:1px;
+			border-top: 1px dashed red;
+		}
+		.treeItem[level_index="0"]>.itemTitle>.itemControl::before{
+			border-top:none;
+		}
+		.treeItem:last-child::after{
+			/* border-left: none; */
+		}
+
+
 	</style>
 </head>
 <body>
@@ -55,26 +94,35 @@
 	var data = [
 		{
 			title:"系统管理",
+			subTitle:'111',
+			subImg:'./icon/open.png',
 			datas:[
 				{
 					title:"机构管理",
+					subTitle:'222',
+					subImg:'',
 					datas:[
 						{
 							title:"假数据1",
+							subTitle:'3333',
 							datas:[]
 						},
 						{
 							title:"假数据1",
+							subTitle:'4444',
+							subImg:'./icon/hide.png',
 							datas:[]
 						}
 					]
 				},
 				{
 					title:"部门管理",
+					subTitle:'555',
 					datas:[]
 				},
 				{
 					title:"员工管理",
+					subTitle:'888',
 					datas:[]
 				}
 			]
