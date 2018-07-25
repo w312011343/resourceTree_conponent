@@ -13,8 +13,14 @@ Tree.prototype = {
 				<div class="treeItem" level_index = "${index}">
 						<div class='itemTitle'>
 							<div class="itemControl itemShow itemIcon"></div>
-							<input class='itemCheck hide itemIcon' type="checkbox"/>
-							<div class="itemLevelTitle"></div>
+							<div class='titleContent'>
+								<div class="itemLevelTitle"></div>
+								<div class="subTitleCont hide">
+									<div class="itemLevelSubTitle"></div>
+									<image class='subTitleImg'></image>
+								</div>
+								
+							</div>
 						</div>
 						<div class="treeLevlCont hide"></div>
 					</div>
@@ -23,14 +29,19 @@ Tree.prototype = {
 				var $treeLevlCont = $item.find('.treeLevlCont');
 				var $itemCheck = $item.find('.itemCheck');
 				var $itemControl = $item.find('.itemControl');
+				var $subTitleCont = $item.find('.subTitleCont');
+				if(val.subTitle){
+					$subTitleCont.removeClass('hide');
+					$subTitleCont.find('.itemLevelSubTitle').text(val.subTitle);
+					val.subImg?$subTitleCont.find('.subTitleImg').attr('src',val.subImg):$subTitleCont.find('.subTitleImg').addClass('hide');
+				}
 				$item.appendTo($container);
 				$treeLevelTitle.text(val.title);
 				if (val.datas&& val.datas.length) {
 					var flag = index+1;
 					self.createIterator(val.datas,$treeLevlCont,flag)
 				}else{
-					$itemCheck.removeClass('hide');
-					$itemControl.addClass('hide');
+					$itemControl.addClass('itemHide').removeClass('itemShow');
 				}
 			}
 
